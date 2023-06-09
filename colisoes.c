@@ -5,9 +5,8 @@
 #include "arvores.h"
 
 Node* raizes;
-noDescritor* entrada;
-Dado* atual;
-DadosEntrada insercao;
+noDescritor* lista;
+Dado* entrada;
 
 int main() {
 
@@ -15,32 +14,37 @@ int main() {
 
     entrada = NULL;
 
-    aux = lerDados(&entrada);
+    aux = lerDados(&lista);
 
     if(!aux){
         printf("Erro na leitura dos dados");
         exit(1);
     }
 
-    printarDados(&entrada);
+    printarDados(&lista);
 
     raizes = inicializaArvores(TIME);
 
     if(!raizes){
-        printf("Erro na inicialização da arvore.");
+        printf("Erro na inicialização da árvore.");
         exit(1);
     }
 
+    entrada = (lista)->first;
 
-    atual = (entrada)->first;
+    while(entrada){
 
-    while(atual){
-        printf("%s ", atual->solution.teacherName);
-        atual = atual->prox;
+        aux = construirArvores(&entrada,&raizes);
+
+        if(!aux){
+            printf("Erro na construção das árvores.");
+            exit(1);    
+        }
+
+        entrada = entrada->prox;
     }
 
-    
-
+    exibirArvore(&raizes);
 
     getchar();
 

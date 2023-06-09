@@ -73,70 +73,95 @@ Node* escolheRaiz(Dado** entrada, Node** raizes){
 
 }
 
+Node* buscaChave(TIPOCHAVE chave, Node** raiz){
+	if((*raiz) == NULL) 
+		return NULL;
+
+	if((*raiz)->type == chave)
+		return (*raiz);
+
+	Node* p = (*raiz)->child;
+
+	while(p) {
+		Node* resp = buscaChave(chave, &p);
+		if(resp) 
+			return(resp);
+
+		p = p->brother;
+	}
+
+	return(NULL);
+}
+
+Node* insere(Node** raiz, TIPOCHAVE novaChave, TIPOCHAVE chavePai){
+
+	Node* pai = buscaChave(chavePai,raiz);
+
+	if(!pai) 
+		return(NULL);
+
+	Node* filho = criaNovoNo(novaChave);
+
+	Node* p = pai->child;
+
+	if(!p){
+		pai->child = filho;
+		pai->numChildren++;
+	} else {
+		while (p->brother){
+			p = p->brother;
+			p->brother = filho;
+		}
+	}
+
+	return(filho);
+}
+
+void exibirArvore(Node** raiz){
+	if((*raiz) == NULL) return;
+
+	printf("%d(",(*raiz)->type);
+	
+	Node* p = (*raiz)->child;
+	while (p) {
+		exibirArvore(&p);
+		p = p->brother;
+	}
+	printf(")");
+}
+
 
 int construirArvores(Dado** entrada, Node** raizes) {
 
+	Node* aux;
 	Node* raizDeInsercao;
 
 	raizDeInsercao = escolheRaiz(entrada,raizes);
+
 
 	if(!raizDeInsercao){
 		printf("Erro na escolha da raiz.");
         exit(1); 
 	}
 
-	printf("%d ", raizDeInsercao->type);
+	//VERIFICAR CODIGO
+
+	aux = insere(&raizDeInsercao,INSTITUTION,TIME); if(!aux) return FALHA;
+		aux->id = (*entrada)->solution.idInstitution;
+		aux->timeSet = raizDeInsercao->timeSet;
+
+	aux = insere(&raizDeInsercao,SOLUTION,INSTITUTION); if(!aux) return FALHA;
+		aux->id = (*entrada)->solution.idSolution;
+		aux->timeSet = raizDeInsercao->timeSet;
+
+	aux = insere(&raizDeInsercao,ROOM,SOLUTION); if(!aux) return FALHA;
+		aux->id = (*entrada)->solution.idRoom;
+		aux->timeSet = raizDeInsercao->timeSet;
+
+	aux = insere(&raizDeInsercao,TEACHER,ROOM); if(!aux) return FALHA;
+		aux->id = (*entrada)->solution.idTeacher;
+		aux->timeSet = raizDeInsercao->timeSet;
 
     return SUCESSO;
 
 }
-
-/*
-
-	struct dado* node;
-
-    	node = (dado*) malloc(sizeof(dado));
-
-    	node = (*entrada)->first;
-
-    	if(!node){
-    		printf("Lista vazia!");
-    		return FALHA;
-    	}
-
-    	while(node){
-
-    		if(raizes[0].id == 0){
-    			
-    			raizes[0].id = 1;
-    			
-					int id;
-				    int idYear;
-				    int idTerm;
-				    int idDay;
-				    int idBeginSlot;
-				    int idEndSlot;
-				    Institution institutions[TAMANHO_MAX_DADOS];
-				    int numInstitutions;
-    			
-
-    			printf("Amanhã iremos implantar alocação de memória.");
-
-
-    		} else {
-
-	    		A ser escrita, será verificado se há colisão do dado que está entrando com os que já estão inseridos na árvore
-	    		
-	    		int aux = checkEntrada(entrada, node);  	
-				
-				
-    		}
-
-    		
-
-    		node = node->prox;
-    	}
-
-    	free(node);
-
-*/
