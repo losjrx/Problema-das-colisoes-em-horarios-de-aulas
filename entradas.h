@@ -40,15 +40,15 @@ typedef struct {
 
 DadosEntrada parseDadosEntrada(char *linha);
 
-typedef struct dado {
+typedef struct Dado {
     unsigned int chave;
     DadosEntrada solution;
-    struct dado* prox;
-} dado;
+    struct Dado* prox;
+} Dado;
 
 typedef struct noDescritor {
-    struct dado* first;
-    struct dado* last;
+    struct Dado* first;
+    struct Dado* last;
     int qtdDados;
 } noDescritor;
 

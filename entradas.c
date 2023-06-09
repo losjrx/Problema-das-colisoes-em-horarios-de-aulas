@@ -31,10 +31,10 @@ int criarLista(noDescritor** noD){
 
 int insOrdemRecebida(noDescritor** noD, DadosEntrada celula){
 
-    struct dado* q;
-    struct dado* r;
+    struct Dado* q;
+    struct Dado* r;
     
-    q=(dado*)malloc(sizeof(dado));
+    q=(struct Dado*)malloc(sizeof(Dado));
     if(q==NULL){printf("MEMORIA INSUFICIENTE\n"); return(FALHA);} else {
         
         (*noD)->qtdDados++;
@@ -88,7 +88,7 @@ int lerDados(noDescritor** noD){
 }
 
 void printarDados(noDescritor** noD){
-    struct dado* q;
+    struct Dado* q;
 
     q=(*noD)->first;
 
