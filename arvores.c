@@ -106,12 +106,12 @@ Node* insere(Node** raiz, TIPOCHAVE novaChave, TIPOCHAVE chavePai){
 
 	if(!p){
 		pai->child = filho;
-		pai->numChildren++;
+		++(pai->numChildren);
 	} else {
 		while (p->brother){
 			p = p->brother;
-			p->brother = filho;
 		}
+		p->brother = filho;
 	}
 
 	return(filho);
@@ -120,7 +120,7 @@ Node* insere(Node** raiz, TIPOCHAVE novaChave, TIPOCHAVE chavePai){
 void exibirArvore(Node** raiz){
 	if((*raiz) == NULL) return;
 
-	printf("%d(",(*raiz)->type);
+	printf("%d(",(*raiz)->id);
 	
 	Node* p = (*raiz)->child;
 	while (p) {
