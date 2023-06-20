@@ -1,0 +1,69 @@
+id,idSolution,solutionName,solutionInitials,idTeacher,teacherName,idDay,idInstitution,idUnit,unitName,idUnitCourse,idCourse,courseName,idClass,className,idDiscipline,disciplineName,idRoom,roomName,studentNumber,sequence,idBeginSlot,beginTimeName,idEndSlot,endTimeName,idYear,idTerm,idCollisionType,collisionLevel,collisionSize
+1,1,Solução Exemplo 01,Sol Ex 01,404,Chaya,2,1,1,INF,1,1,Jogos Digitais,1,JD01,1001,Comunicação Empresarial,101,Sala 101,40,1,39,19:00:00,41,20:00:00,2023,1,0,0,0
+2,1,Solução Exemplo 01,Sol Ex 01,404,Chaya,2,1,1,INF,1,1,Jogos Digitais,1,JD01,1001,Comunicação Empresarial,101,Sala 101,40,1,42,20:30:00,44,21:30:00,2023,1,0,0,0
+3,1,Solução Exemplo 01,Sol Ex 01,407,Liane Margarida,3,1,1,INF,1,1,Jogos Digitais,1,JD01,1002,Metodologia Científica,101,Sala 101,40,1,39,19:00:00,41,20:00:00,2023,1,0,0,0
+4,1,Solução Exemplo 01,Sol Ex 01,407,Liane Margarida,3,1,1,INF,1,1,Jogos Digitais,1,JD01,1002,Metodologia Científica,101,Sala 101,40,1,42,20:30:00,44,21:30:00,2023,1,0,0,0
+5,1,Solução Exemplo 01,Sol Ex 01,401,René,4,1,1,INF,1,1,Jogos Digitais,1,JD01,1003,Geometria Analítica ,101,Sala 101,40,1,39,19:00:00,41,20:00:00,2023,1,0,0,0
+6,1,Solução Exemplo 01,Sol Ex 01,401,René,4,1,1,INF,1,1,Jogos Digitais,1,JD01,1003,Geometria Analítica ,101,Sala 101,40,1,42,20:30:00,44,21:30:00,2023,1,0,0,0
+7,1,Solução Exemplo 01,Sol Ex 01,407,Liane Margarida,5,1,1,INF,1,1,Jogos Digitais,1,JD01,1004,Lógica de Programação,101,Sala 101,40,1,39,19:00:00,41,20:00:00,2023,1,0,0,0
+8,1,Solução Exemplo 01,Sol Ex 01,407,Liane Margarida,5,1,1,INF,1,1,Jogos Digitais,1,JD01,1004,Lógica de Programação,101,Sala 101,40,1,42,20:30:00,44,21:30:00,2023,1,0,0,0
+9,1,Solução Exemplo 01,Sol Ex 01,415,Idalberto,6,1,1,INF,1,1,Jogos Digitais,1,JD01,1005,Sistemas de Informações Gerenciais,101,Sala 101,40,1,39,19:00:00,41,20:00:00,2023,1,0,0,0
+10,1,Solução Exemplo 01,Sol Ex 01,402,Jules Henri,6,1,1,INF,1,1,Jogos Digitais,1,JD01,1006,Fundamentos de Matemática – I,101,Sala 101,40,1,42,20:30:00,44,21:30:00,2023,1,0,0,0
+11,1,Solução Exemplo 01,Sol Ex 01,420,Bill Gates,2,1,1,INF,1,1,Jogos Digitais,2,JD02,2001,Programação de Computadores,201,Sala 201,40,2,39,19:00:00,41,20:00:00,2023,1,0,0,0
+12,1,Solução Exemplo 01,Sol Ex 01,420,Bill Gates,2,1,1,INF,1,1,Jogos Digitais,2,JD02,2001,Programação de Computadores,201,Sala 201,40,2,42,20:30:00,44,21:30:00,2023,1,0,0,0
+13,1,Solução Exemplo 01,Sol Ex 01,415,Idalberto,3,1,1,INF,1,1,Jogos Digitais,2,JD02,2002,Fundamentos da Gestão,102,Sala 102,40,2,39,19:00:00,41,20:00:00,2023,1,0,0,0
+14,1,Solução Exemplo 01,Sol Ex 01,401,René,3,1,1,INF,1,1,Jogos Digitais,2,JD02,2003,Cálculo Vetorial,102,Sala 102,40,2,42,20:30:00,44,21:30:00,2023,1,0,0,0
+15,1,Solução Exemplo 01,Sol Ex 01,401,René,4,1,1,INF,1,1,Jogos Digitais,2,JD02,2003,Cálculo Vetorial,102,Sala 102,40,2,39,19:00:00,41,20:00:00,2023,1,0,0,0
+16,1,Solução Exemplo 01,Sol Ex 01,415,Idalberto,6,1,1,INF,1,1,Jogos Digitais,2,JD02,2002,Fundamentos da Gestão,102,Sala 102,40,2,42,20:30:00,44,21:30:00,2023,1,0,0,0
+17,1,Solução Exemplo 01,Sol Ex 01,414,Walid Jradi,5,1,1,INF,1,1,Jogos Digitais,2,JD02,2004,Edição Digital de Imagens,201,Sala 201,40,2,39,19:00:00,41,20:00:00,2023,1,0,0,0
+18,1,Solução Exemplo 01,Sol Ex 01,414,Walid Jradi,5,1,1,INF,1,1,Jogos Digitais,2,JD02,2004,Edição Digital de Imagens,201,Sala 201,40,2,42,20:30:00,44,21:30:00,2023,1,0,0,0
+19,1,Solução Exemplo 01,Sol Ex 01,409,Tetsuya,4,1,1,INF,1,1,Jogos Digitais,2,JD02,2005,Criação de Personagens 2D,201,Sala 201,40,2,39,19:00:00,41,20:00:00,2023,1,0,0,0
+20,1,Solução Exemplo 01,Sol Ex 01,409,Tetsuya,6,1,1,INF,1,1,Jogos Digitais,2,JD02,2005,Criação de Personagens 2D,201,Sala 201,40,2,42,20:30:00,44,21:30:00,2023,1,0,0,0
+21,1,Solução Exemplo 01,Sol Ex 01,416,Daniele,7,1,1,INF,1,1,Jogos Digitais,2,JD02,2006,Roteiro do Jogos Digitais,201,Sala 201,40,2,17,08:00:00,19,09:00:00,2023,1,0,0,0
+22,1,Solução Exemplo 01,Sol Ex 01,416,Daniele,7,1,1,INF,1,1,Jogos Digitais,2,JD02,2006,Roteiro do Jogos Digitais,201,Sala 201,40,2,21,10:00:00,23,11:00:00,2023,1,0,0,0
+23,1,Solução Exemplo 01,Sol Ex 01,417,John,2,1,1,INF,1,1,Jogos Digitais,3,JD03,3001,3D Engines,103,Sala 103,40,3,39,19:00:00,41,20:00:00,2023,1,0,0,0
+24,1,Solução Exemplo 01,Sol Ex 01,406,Steve Paul,2,1,1,INF,1,1,Jogos Digitais,3,JD03,3002,Animação 3D,202,Sala 202,40,3,42,20:30:00,44,21:30:00,2023,1,0,0,0
+25,1,Solução Exemplo 01,Sol Ex 01,417,John,3,1,1,INF,1,1,Jogos Digitais,3,JD03,3001,3D Engines,202,Sala 202,40,3,39,19:00:00,41,20:00:00,2023,1,0,0,0
+26,1,Solução Exemplo 01,Sol Ex 01,406,Steve Paul,3,1,1,INF,1,1,Jogos Digitais,3,JD03,3002,Animação 3D,202,Sala 202,40,3,42,20:30:00,44,21:30:00,2023,1,0,0,0
+27,1,Solução Exemplo 01,Sol Ex 01,416,Daniele,4,1,1,INF,1,1,Jogos Digitais,3,JD03,3003,Modelagem 3D,202,Sala 202,40,3,39,19:00:00,41,20:00:00,2023,1,0,0,0
+28,1,Solução Exemplo 01,Sol Ex 01,416,Daniele,4,1,1,INF,1,1,Jogos Digitais,3,JD03,3003,Modelagem 3D,202,Sala 202,40,3,42,20:30:00,44,21:30:00,2023,1,0,0,0
+29,1,Solução Exemplo 01,Sol Ex 01,418,Junichi,5,1,1,INF,1,1,Jogos Digitais,3,JD03,3004,Criação de Personagens 3D,202,Sala 202,40,3,39,19:00:00,41,20:00:00,2023,1,0,0,0
+30,1,Solução Exemplo 01,Sol Ex 01,418,Junichi,5,1,1,INF,1,1,Jogos Digitais,3,JD03,3004,Criação de Personagens 3D,202,Sala 202,40,3,42,20:30:00,44,21:30:00,2023,1,0,0,0
+31,1,Solução Exemplo 01,Sol Ex 01,418,Junichi,6,1,1,INF,1,1,Jogos Digitais,3,JD03,3004,Criação de Personagens 3D,105,Sala 105,40,3,39,19:00:00,41,20:00:00,2023,1,0,0,0
+32,1,Solução Exemplo 01,Sol Ex 01,418,Junichi,6,1,1,INF,1,1,Jogos Digitais,3,JD03,3004,Criação de Personagens 3D,202,Sala 202,40,3,42,20:30:00,44,21:30:00,2023,1,0,0,0
+33,1,Solução Exemplo 01,Sol Ex 01,418,Junichi,7,1,1,INF,1,1,Jogos Digitais,3,JD03,3005,Projeto Integrador – I,101,Sala 101,40,3,17,08:00:00,19,09:00:00,2023,1,0,0,0
+34,1,Solução Exemplo 01,Sol Ex 01,418,Junichi,7,1,1,INF,1,1,Jogos Digitais,3,JD03,3005,Projeto Integrador – I,105,Sala 105,40,3,21,10:00:00,23,11:00:00,2023,1,0,0,0
+35,1,Solução Exemplo 01,Sol Ex 01,403,Isaac,2,1,1,INF,1,1,Jogos Digitais,4,JD04,4001,Física para Jogos,102,Sala 102,40,4,39,19:00:00,41,20:00:00,2023,1,0,0,0
+36,1,Solução Exemplo 01,Sol Ex 01,403,Isaac,2,1,1,INF,1,1,Jogos Digitais,4,JD04,4001,Física para Jogos,102,Sala 102,40,4,42,20:30:00,44,21:30:00,2023,1,0,0,0
+37,1,Solução Exemplo 01,Sol Ex 01,417,John,3,1,1,INF,1,1,Jogos Digitais,4,JD04,4002,Interface de Jogos,203,Sala 203,40,4,39,19:00:00,41,20:00:00,2023,1,0,0,0
+38,1,Solução Exemplo 01,Sol Ex 01,417,John,3,1,1,INF,1,1,Jogos Digitais,4,JD04,4002,Interface de Jogos,203,Sala 203,40,4,42,20:30:00,44,21:30:00,2023,1,0,0,0
+39,1,Solução Exemplo 01,Sol Ex 01,415,Idalberto,4,1,1,INF,1,1,Jogos Digitais,4,JD04,4003,Empreendedorismo,104,Sala 104,40,4,39,19:00:00,41,20:00:00,2023,1,0,0,0
+40,1,Solução Exemplo 01,Sol Ex 01,410,Valdemar,4,1,1,INF,1,1,Jogos Digitais,4,JD04,4004,BD para Jogos,203,Sala 203,40,4,42,20:30:00,44,21:30:00,2023,1,0,0,0
+41,1,Solução Exemplo 01,Sol Ex 01,410,Valdemar,5,1,1,INF,1,1,Jogos Digitais,4,JD04,4004,BD para Jogos,203,Sala 203,40,4,39,19:00:00,41,20:00:00,2023,1,0,0,0
+42,1,Solução Exemplo 01,Sol Ex 01,410,Valdemar,5,1,1,INF,1,1,Jogos Digitais,4,JD04,4004,BD para Jogos,203,Sala 203,40,4,42,20:30:00,44,21:30:00,2023,1,0,0,0
+43,1,Solução Exemplo 01,Sol Ex 01,418,Junichi,6,1,1,INF,1,1,Jogos Digitais,4,JD04,4005,Projeto Integrador – II,105,Sala 105,40,4,39,19:00:00,41,20:00:00,2023,1,0,0,0
+44,1,Solução Exemplo 01,Sol Ex 01,418,Junichi,6,1,1,INF,1,1,Jogos Digitais,4,JD04,4005,Projeto Integrador – II,105,Sala 105,40,4,42,20:30:00,44,21:30:00,2023,1,0,0,0
+45,1,Solução Exemplo 01,Sol Ex 01,418,Junichi,7,1,1,INF,1,1,Jogos Digitais,4,JD04,4005,Projeto Integrador – II,105,Sala 105,40,4,17,08:00:00,19,09:00:00,2023,1,0,0,0
+46,1,Solução Exemplo 01,Sol Ex 01,418,Junichi,7,1,1,INF,1,1,Jogos Digitais,4,JD04,4005,Projeto Integrador – II,105,Sala 105,40,4,21,10:00:00,23,11:00:00,2023,1,0,0,0
+47,1,Solução Exemplo 01,Sol Ex 01,411,Grace,2,1,1,INF,1,1,Jogos Digitais,5,JD05,5001,Jogos em Rede,203,Sala 203,40,5,39,19:00:00,41,20:00:00,2023,1,0,0,0
+48,1,Solução Exemplo 01,Sol Ex 01,411,Grace,2,1,1,INF,1,1,Jogos Digitais,5,JD05,5001,Jogos em Rede,203,Sala 203,40,5,42,20:30:00,44,21:30:00,2023,1,0,0,0
+49,1,Solução Exemplo 01,Sol Ex 01,412,Hannah,3,1,1,INF,1,1,Jogos Digitais,5,JD05,5002,Direitos Humanos e Cidadania,105,Sala 105,40,5,39,19:00:00,41,20:00:00,2023,1,0,0,0
+50,1,Solução Exemplo 01,Sol Ex 01,412,Hannah,3,1,1,INF,1,1,Jogos Digitais,5,JD05,5002,Direitos Humanos e Cidadania,105,Sala 105,40,5,42,20:30:00,44,21:30:00,2023,1,0,0,0
+51,1,Solução Exemplo 01,Sol Ex 01,420,Chris,4,1,1,INF,1,1,Jogos Digitais,5,JD05,5003,Edição Digital de Vídeos,203,Sala 203,40,5,39,19:00:00,41,20:00:00,2023,1,0,0,0
+52,1,Solução Exemplo 01,Sol Ex 01,413,Florência,4,1,1,INF,1,1,Jogos Digitais,5,JD05,5004,Sonorização de Jogos,203,Sala 203,40,5,42,20:30:00,44,21:30:00,2023,1,0,0,0
+53,1,Solução Exemplo 01,Sol Ex 01,420,Chris,5,1,1,INF,1,1,Jogos Digitais,5,JD05,5003,Edição Digital de Vídeos,203,Sala 203,40,5,39,19:00:00,41,20:00:00,2023,1,0,0,0
+54,1,Solução Exemplo 01,Sol Ex 01,413,Florência,5,1,1,INF,1,1,Jogos Digitais,5,JD05,5004,Sonorização de Jogos,203,Sala 203,40,5,42,20:30:00,44,21:30:00,2023,1,0,0,0
+55,1,Solução Exemplo 01,Sol Ex 01,420,Paul,6,1,1,INF,1,1,Jogos Digitais,5,JD05,5005,Projeto Integrador – III,105,Sala 105,40,5,39,19:00:00,41,20:00:00,2023,1,0,0,0
+56,1,Solução Exemplo 01,Sol Ex 01,420,Paul,6,1,1,INF,1,1,Jogos Digitais,5,JD05,5005,Projeto Integrador – III,105,Sala 105,40,5,42,20:30:00,44,21:30:00,2023,1,0,0,0
+57,1,Solução Exemplo 01,Sol Ex 01,404,Chaya,2,2,2,INF,2,13,Engenharia de Computação,1,EC-101,6001,Língua Portuguesa I,1001,Sala 1001,30,1,38,18:30:00,40,19:30:00,2023,1,0,0,0
+58,1,Solução Exemplo 01,Sol Ex 01,404,Chaya,2,2,2,INF,2,13,Engenharia de Computação,1,EC-101,6001,Língua Portuguesa I,1001,Sala 1001,30,1,41,20:00:00,43,21:00:00,2023,1,0,0,0
+59,1,Solução Exemplo 01,Sol Ex 01,403,Isaac,3,2,2,INF,2,13,Engenharia de Computação,1,EC-101,6002,Física Geral,1001,Sala 1001,30,1,38,18:30:00,40,19:30:00,2023,1,0,0,0
+60,1,Solução Exemplo 01,Sol Ex 01,403,Isaac,3,2,2,INF,2,13,Engenharia de Computação,1,EC-101,6002,Física Geral,1001,Sala 1001,30,1,41,20:00:00,43,21:00:00,2023,1,0,0,0
+61,1,Solução Exemplo 01,Sol Ex 01,412,Hannah,4,2,2,INF,2,13,Engenharia de Computação,1,EC-101,6003,Introdução ao Direito,1001,Sala 1001,30,1,39,19:00:00,40,19:30:00,2023,1,0,0,0
+62,1,Solução Exemplo 01,Sol Ex 01,412,Hannah,4,2,2,INF,2,13,Engenharia de Computação,1,EC-101,6003,Introdução ao Direito,1001,Sala 1001,30,1,42,20:30:00,43,21:00:00,2023,1,0,0,0
+63,1,Solução Exemplo 01,Sol Ex 01,401,René,5,2,2,INF,2,13,Engenharia de Computação,1,EC-101,6004,Geometria Analítica ,1001,Sala 1001,30,1,38,18:30:00,40,19:30:00,2023,1,0,0,0
+64,1,Solução Exemplo 01,Sol Ex 01,401,René,5,2,2,INF,2,13,Engenharia de Computação,1,EC-101,6004,Geometria Analítica ,1001,Sala 1001,30,2,41,20:00:00,43,21:00:00,2023,1,0,0,0
+65,1,Solução Exemplo 01,Sol Ex 01,402,Jules Henri,6,2,2,INF,2,13,Engenharia de Computação,1,EC-101,6005,Matemática Básica,1001,Sala 1001,30,1,38,18:30:00,40,19:30:00,2023,1,0,0,0
+66,1,Solução Exemplo 01,Sol Ex 01,402,Jules Henri,6,2,2,INF,2,13,Engenharia de Computação,1,EC-101,6005,Matemática Básica,1001,Sala 1001,30,1,41,20:00:00,43,21:00:00,2023,1,0,0,0
+67,1,Solução Exemplo 01,Sol Ex 01,416,Daniele,7,2,2,INF,2,13,Engenharia de Computação,1,EC-101,6006,Introdução à Programação,1002,Sala 1002,30,1,16,07:30:00,18,08:30:00,2023,1,0,0,0
+68,1,Solução Exemplo 01,Sol Ex 01,416,Daniele,7,2,2,INF,2,13,Engenharia de Computação,1,EC-101,6006,Introdução à Programação,1002,Sala 1002,30,1,20,09:30:00,22,10:30:00,2023,1,0,0,0

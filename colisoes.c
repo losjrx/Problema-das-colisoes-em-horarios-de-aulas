@@ -34,6 +34,9 @@ int main() {
 
     while(entrada){
 
+        checarColisoesParciais(&entrada,&raizes,&lista);
+        checarColisoesTotais(&entrada,&raizes,&lista);
+
         aux = construirArvores(&entrada,&raizes);
 
         if(!aux){
@@ -44,7 +47,9 @@ int main() {
         entrada = entrada->prox;
     }
 
-    exibirArvore(&raizes);
+    Node* r = raizes;
+
+    exibirArvore(&r,0);
 
     getchar();
 

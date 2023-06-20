@@ -5,7 +5,7 @@
 
 DadosEntrada parseDadosEntrada(char *linha) {
     DadosEntrada entrada;
-    sscanf(linha, "%d, %d, '%[^']', '%[^']', %d, '%[^']', %d, %d, %d, '%[^']', %d, %d, '%[^']', %d, '%[^']', %d, '%[^']', %d, '%[^']', %d, %d, %d, '%[^']', %d, '%[^']', %d, %d, %d, %d, %d",
+    sscanf(linha, "%d,%d,%[^,],%[^,],%d,%[^,],%d,%d,%d,%[^,],%d,%d,%[^,],%d,%[^,],%d,%[^,],%d,%[^,],%d,%d,%d,%[^,],%d,%[^,],%d,%d,%d,%d,%d",
            &entrada.id, &entrada.idSolution, entrada.solutionName, entrada.solutionInitials, &entrada.idTeacher, entrada.teacherName, &entrada.idDay,
            &entrada.idInstitution, &entrada.idUnit, entrada.unitName, &entrada.idUnitCourse, &entrada.idCourse, entrada.courseName, &entrada.idClass,
            entrada.className, &entrada.idDiscipline, entrada.disciplineName, &entrada.idRoom, entrada.roomName, &entrada.studentsNumber,
@@ -34,7 +34,7 @@ int insOrdemRecebida(noDescritor** noD, DadosEntrada celula){
     struct Dado* q;
     struct Dado* r;
     
-    q=(struct Dado*)malloc(sizeof(Dado));
+    q=(Dado*)malloc(sizeof(Dado));
     if(q==NULL){printf("MEMORIA INSUFICIENTE\n"); return(FALHA);} else {
         
         (*noD)->qtdDados++;
@@ -57,7 +57,7 @@ int insOrdemRecebida(noDescritor** noD, DadosEntrada celula){
 
 int lerDados(noDescritor** noD){
 
-    FILE *file = fopen("dados.csv", "r");
+    FILE *file = fopen("ColisaoHorarios-DadosEntrada.csv", "r");
     if (file == NULL) {
         printf("Erro ao abrir o arquivo.\n");
         return FALHA;
@@ -70,6 +70,8 @@ int lerDados(noDescritor** noD){
     }
 
     char linha[TAMANHO_MAX_STRING];
+
+    fgets(linha, sizeof(linha), file); //ignora primeira linha que contém nomes das variáveis.
 
     while (fgets(linha, sizeof(linha), file) != NULL) {
 
@@ -128,4 +130,14 @@ void printarDados(noDescritor** noD){
 
         q=q->prox;
     }
+}
+
+Dado* encontraDado(int idSolution, noDescritor** noD){
+    Dado* q = (*noD)->first;
+
+    while(q->solution.idSolution != idSolution){
+        q = q->prox;
+    }
+
+    return q;
 }

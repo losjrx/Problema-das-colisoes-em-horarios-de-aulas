@@ -56,5 +56,6 @@ int criarLista(noDescritor** noD);
 int insOrdemRecebida(noDescritor** noD, DadosEntrada celula);
 int lerDados(noDescritor** noD);
 void printarDados(noDescritor** noD);
+Dado* encontraDado(int idSolution, noDescritor** noD);
 
 #endif

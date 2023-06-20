@@ -6,11 +6,11 @@
 
 int numRaizes = 0;
 
-Node* criaNovoNo(int TIPOCHAVE){
+Node* criaNovoNo(int tipoNo){
 
 	Node* novo = (Node*)malloc(sizeof(Node));
 	novo->id = 0;
-	novo->type = TIPOCHAVE;
+	novo->type = tipoNo;
 	novo->timeSet = NULL;
 	novo->child = NULL;
 	novo->brother = NULL;
@@ -19,8 +19,8 @@ Node* criaNovoNo(int TIPOCHAVE){
 	return(novo);
 }
 
-Node* inicializaArvores(int TIPOCHAVE){
-	return(criaNovoNo(TIPOCHAVE));
+Node* inicializaArvores(int tipoNo){
+	return(criaNovoNo(tipoNo));
 }
 
 Node* escolheRaiz(Dado** entrada, Node** raizes){
@@ -29,24 +29,24 @@ Node* escolheRaiz(Dado** entrada, Node** raizes){
 	Node* novaRoot;
 	Node* root = (*raizes);
 
+	if(root->id == 0){
+		root->id = ++numRaizes;
+
+		Time* time = (Time*)malloc(sizeof(TIME));
+		time->idYear = (*entrada)->solution.idYear;
+		time->idTerm = (*entrada)->solution.idTerm;
+		time->idDay = (*entrada)->solution.idDay;
+		time->idBeginSlot = (*entrada)->solution.idBeginSlot;
+		time->idEndSlot = (*entrada)->solution.idEndSlot;
+
+		root->timeSet = time;
+
+		return root;
+	}
+
 	while(root){
-		if(root->id == 0){
-			root->id = ++numRaizes;
-
-			Time* time = (Time*)malloc(sizeof(TIME));
-			time->idYear = (*entrada)->solution.idYear;
-			time->idTerm = (*entrada)->solution.idTerm;
-			time->idDay = (*entrada)->solution.idDay;
-			time->idBeginSlot = (*entrada)->solution.idBeginSlot;
-			time->idEndSlot = (*entrada)->solution.idEndSlot;
-
-			root->timeSet = time;
-
-			return root;
-
-		}
-
-		if(root->timeSet->idYear == (*entrada)->solution.idYear && root->timeSet->idTerm == (*entrada)->solution.idTerm && root->timeSet->idDay == (*entrada)->solution.idDay && root->timeSet->idBeginSlot == (*entrada)->solution.idBeginSlot && root->timeSet->idEndSlot == (*entrada)->solution.idEndSlot){
+		
+		if((root->timeSet)->idYear == (*entrada)->solution.idYear && (root->timeSet)->idTerm == (*entrada)->solution.idTerm && (root->timeSet)->idDay == (*entrada)->solution.idDay && (root->timeSet)->idBeginSlot == (*entrada)->solution.idBeginSlot && (root->timeSet)->idEndSlot == (*entrada)->solution.idEndSlot){
 			return root;
 		}
 
@@ -73,61 +73,180 @@ Node* escolheRaiz(Dado** entrada, Node** raizes){
 
 }
 
-Node* buscaChave(TIPOCHAVE chave, Node** raiz){
+Node* buscaPai(TIPOCHAVE chavePai, Dado** entrada, Node** raiz){
 	if((*raiz) == NULL) 
-		return NULL;
+		return FALHA;
 
-	if((*raiz)->type == chave)
-		return (*raiz);
+	Node* aux = (*raiz);
+	while(aux){
+		if(aux->type == chavePai){
+			break;
+		}
+		aux = aux->child;
 
-	Node* p = (*raiz)->child;
 
-	while(p) {
-		Node* resp = buscaChave(chave, &p);
-		if(resp) 
-			return(resp);
+		switch(aux->type){
+			case INSTITUTION: 	while(aux->id != (*entrada)->solution.idInstitution){
+									aux = aux->brother;
+								}
 
-		p = p->brother;
+				break;
+								
+			case SOLUTION: 		while(aux->id != (*entrada)->solution.id){
+									aux = aux->brother;
+								}
+				break;
+
+				default: break;
+		}
 	}
 
-	return(NULL);
+	if(!aux){
+		printf("FALHA"); getchar();
+		return FALHA;
+	}
+
+	if(aux->type == chavePai){
+		switch(chavePai){
+			case TIME: 
+				return (*raiz);
+			case INSTITUTION: 
+				while(aux->brother){
+					if(aux->id == (*entrada)->solution.idInstitution){
+						return aux;
+					}
+					aux = aux->brother;
+				}
+				if(aux->id == (*entrada)->solution.idInstitution){
+					return aux;
+				} else {
+					Node* novaRaiz = criaNovoNo(chavePai);
+					novaRaiz->timeSet = (*raiz)->timeSet;
+					novaRaiz->id = (*entrada)->solution.idInstitution;
+					aux->brother = novaRaiz;
+					return novaRaiz;
+				}
+
+				break;
+			case SOLUTION: 
+				while(aux->brother){
+					if(aux->id == (*entrada)->solution.id){
+						return aux;
+					}
+					aux = aux->brother;
+				}
+				if(aux->id == (*entrada)->solution.id){
+					return aux;
+				} else {
+					Node* novaRaiz = criaNovoNo(chavePai);
+					novaRaiz->timeSet = (*raiz)->timeSet;
+					novaRaiz->id = (*entrada)->solution.id;
+					aux->brother = novaRaiz;
+					return novaRaiz;
+				}
+				break;
+			default:
+					if(aux->type == ROOM || aux->type == TEACHER){
+						return aux;
+					}
+				return FALHA;
+		}		
+	}
 }
 
-Node* insere(Node** raiz, TIPOCHAVE novaChave, TIPOCHAVE chavePai){
+int verifiqueId(TIPOCHAVE chavePai,Node** p,Dado** entrada){
+	switch((*p)->type){
+		case INSTITUTION: if((*p)->id == (*entrada)->solution.idInstitution){ return SUCESSO;}
+			break;
+		case SOLUTION: if((*p)->id == (*entrada)->solution.id){ return SUCESSO;}
+			break;
+		case ROOM: if((*p)->id == (*entrada)->solution.idRoom){ return SUCESSO;}
+			break;
+		default: return FALHA;
+	}
+	return FALHA;
+}
 
-	Node* pai = buscaChave(chavePai,raiz);
+Node* insere(Node** raiz, Dado** entrada, TIPOCHAVE novaChave, TIPOCHAVE chavePai){
+
+	Node* pai = buscaPai(chavePai, entrada, raiz);
 
 	if(!pai) 
-		return(NULL);
+		return NULL;
 
 	Node* filho = criaNovoNo(novaChave);
 
+	filho->timeSet = (*raiz)->timeSet;
+
+	switch(novaChave){
+		case INSTITUTION: filho->id = (*entrada)->solution.idInstitution;
+			break;
+		case SOLUTION: filho->id = (*entrada)->solution.id;
+			break;
+		case ROOM: filho->id = (*entrada)->solution.idRoom;
+			break;
+		case TEACHER: filho->id = (*entrada)->solution.idTeacher;
+			break;
+		default:
+			break;
+	}
+
 	Node* p = pai->child;
+
 
 	if(!p){
 		pai->child = filho;
 		++(pai->numChildren);
 	} else {
-		while (p->brother){
+		while(p->brother) {
+			if(verifiqueId(chavePai,&p,entrada)){
+				return p;
+			}
+
 			p = p->brother;
 		}
+
+		if(verifiqueId(chavePai,&p,entrada)){
+				return p;
+		}
+
 		p->brother = filho;
 	}
 
-	return(filho);
+	return filho;
 }
 
-void exibirArvore(Node** raiz){
-	if((*raiz) == NULL) return;
+void exibirArvore(Node** raiz, int profundidade) {
+    if ((*raiz) == NULL)
+        return;
 
-	printf("%d(",(*raiz)->id);
-	
-	Node* p = (*raiz)->child;
-	while (p) {
-		exibirArvore(&p);
-		p = p->brother;
-	}
-	printf(")");
+    for (int i = 0; i < profundidade; i++)
+        printf("\t");
+
+    switch ((*raiz)->type) {
+        case TIME:
+            printf("TIME: %d\n", (*raiz)->id);
+            break;
+        case INSTITUTION:
+            printf("INSTITUTION: %d\n", (*raiz)->id);
+            break;
+        case SOLUTION:
+            printf("SOLUTION: %d\n", (*raiz)->id);
+            break;
+        case ROOM:
+            printf("ROOM: %d\n", (*raiz)->id);
+            break;
+        case TEACHER:
+            printf("TEACHER: %d\n", (*raiz)->id);
+            break;
+        default:
+            break;
+    }
+
+    Node* root = (*raiz);
+
+    exibirArvore(&root->child, profundidade + 1);
+    exibirArvore(&root->brother, profundidade);
 }
 
 
@@ -144,24 +263,58 @@ int construirArvores(Dado** entrada, Node** raizes) {
         exit(1); 
 	}
 
-	//VERIFICAR CODIGO
+	aux = insere(&raizDeInsercao,entrada,INSTITUTION,TIME); if(!aux) return FALHA;
 
-	aux = insere(&raizDeInsercao,INSTITUTION,TIME); if(!aux) return FALHA;
-		aux->id = (*entrada)->solution.idInstitution;
-		aux->timeSet = raizDeInsercao->timeSet;
+	aux = insere(&raizDeInsercao,entrada,SOLUTION,INSTITUTION); if(!aux) return FALHA;
 
-	aux = insere(&raizDeInsercao,SOLUTION,INSTITUTION); if(!aux) return FALHA;
-		aux->id = (*entrada)->solution.idSolution;
-		aux->timeSet = raizDeInsercao->timeSet;
+	aux = insere(&raizDeInsercao,entrada,ROOM,SOLUTION); if(!aux) return FALHA;
 
-	aux = insere(&raizDeInsercao,ROOM,SOLUTION); if(!aux) return FALHA;
-		aux->id = (*entrada)->solution.idRoom;
-		aux->timeSet = raizDeInsercao->timeSet;
-
-	aux = insere(&raizDeInsercao,TEACHER,ROOM); if(!aux) return FALHA;
-		aux->id = (*entrada)->solution.idTeacher;
-		aux->timeSet = raizDeInsercao->timeSet;
+	aux = insere(&raizDeInsercao,entrada,TEACHER,ROOM); if(!aux) return FALHA;
 
     return SUCESSO;
 
+}
+
+void checarColisoesParciais(Dado** entrada, Node** raizes, noDescritor** lista){
+
+	struct Dado* e = (*entrada);
+	struct Dado* l = (*lista)->first;
+
+	Node* r = (*raizes);
+
+	if(r->id == 0) {
+		return;
+	}
+
+	while(r){
+
+		//Caso em que a colisão é PARCIAL para a ENTRADA e TOTAL para a RAIZ //4,5,8
+		if(((e->solution.idBeginSlot < r->timeSet->idBeginSlot) && (e->solution.idEndSlot ==  r->timeSet->idEndSlot)) || 
+			((e->solution.idBeginSlot == r->timeSet->idBeginSlot) && (e->solution.idEndSlot > r->timeSet->idEndSlot)) ||
+			((e->solution.idBeginSlot < r->timeSet->idBeginSlot) && (e->solution.idEndSlot > r->timeSet->idEndSlot))) {
+
+
+		}
+
+		//Caso em que a colisão é PARCIAL para a RAIZ e TOTAL para a ENTRADA  //1,6,7
+		if(((e->solution.idBeginSlot > r->timeSet->idBeginSlot) && (e->solution.idEndSlot == r->timeSet->idEndSlot)) ||
+			((e->solution.idBeginSlot == r->timeSet->idBeginSlot) && (e->solution.idEndSlot < r->timeSet->idEndSlot)) ||
+			((e->solution.idBeginSlot > r->timeSet->idBeginSlot) && (e->solution.idBeginSlot < r->timeSet->idEndSlot) && (e->solution.idEndSlot < r->timeSet->idEndSlot))) {
+
+
+		}
+
+		//Caso em que a colisão é PARCIAL para a ENTRADA e PARCIAL para a RAIZ //2,3
+		if(((e->solution.idBeginSlot > r->timeSet->idBeginSlot) && (e->solution.idBeginSlot < r->timeSet->idEndSlot) && (e->solution.idEndSlot > r->timeSet->idEndSlot)) || 
+			((e->solution.idBeginSlot < r->timeSet->idBeginSlot) && (e->solution.idEndSlot > r->timeSet->idBeginSlot) && (e->solution.idEndSlot < r->timeSet->idEndSlot))) {
+
+
+		}
+
+		r = r->brother;
+	}
+}
+
+void checarColisoesTotais(Dado** entrada, Node** raizes, noDescritor** lista){
+	return;
 }
