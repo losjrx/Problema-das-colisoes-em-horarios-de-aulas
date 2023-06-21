@@ -33,18 +33,16 @@ Node* inicializaArvores(int TIPOCHAVE);
 
 Node* escolheRaiz(Dado** entrada, Node** raizes);
 
+Node* verificaIdRaiz(Node** pai, int id);
+
 Node* buscaPai(TIPOCHAVE chavePai, Dado** entrada, Node** raiz);
 
-int verifiqueId(TIPOCHAVE chavePai,Node** p,Dado** entrada);
+int verifiqueId(Node** p,Dado** entrada);
 
 Node* insere(Node** raiz, Dado** entrada, TIPOCHAVE novaChave, TIPOCHAVE chavePai);
 
 void exibirArvore(Node** raiz, int profundidade);
 
 int construirArvores(Dado** entrada, Node** raizes);
-
-void checarColisoesParciais(Dado** entrada, Node** raizes, noDescritor** lista);
-
-void checarColisoesTotais(Dado** entrada, Node** raizes, noDescritor** lista);
 
 #endif
