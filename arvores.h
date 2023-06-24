@@ -6,8 +6,6 @@
 #define TIME 10
 #define INSTITUTION 11
 #define SOLUTION 100
-#define ROOM 101
-#define TEACHER 110
 typedef int TIPOCHAVE;
 
 typedef struct Time {
@@ -25,6 +23,7 @@ typedef struct Node {
     struct Node* child;
     struct Node* brother;
     int numChildren;
+    Dado* dadosSolucao;
 } Node;
 
 Node* criaNovoNo(int TIPOCHAVE);
@@ -41,8 +40,8 @@ int verifiqueId(Node** p,Dado** entrada);
 
 Node* insere(Node** raiz, Dado** entrada, TIPOCHAVE novaChave, TIPOCHAVE chavePai);
 
-void exibirArvore(Node** raiz, int profundidade);
+void exibirArvore(Node** raiz, int profundidade, FILE* arquivo);
 
-int construirArvores(Dado** entrada, Node** raizes);
+Node* construirArvores(Dado** entrada, Node** raizes);
 
 #endif

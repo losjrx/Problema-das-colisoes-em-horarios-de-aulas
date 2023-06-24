@@ -36,6 +36,7 @@ typedef struct {
     int idCollisionType;
     int collisionLevel;
     int collisionSize;
+    struct DadosEntrada* colisao;
 } DadosEntrada;
 
 DadosEntrada parseDadosEntrada(char *linha);

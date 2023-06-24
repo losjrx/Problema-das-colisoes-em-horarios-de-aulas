@@ -12,6 +12,8 @@ DadosEntrada parseDadosEntrada(char *linha) {
            &entrada.sequence, &entrada.idBeginSlot, entrada.beginTimeName, &entrada.idEndSlot, entrada.endTimeName, &entrada.idYear, &entrada.idTerm,
            &entrada.idCollisionType, &entrada.collisionLevel, &entrada.collisionSize);
 
+    entrada.colisao = NULL;
+
     return entrada;
 }
 

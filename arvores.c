@@ -15,6 +15,7 @@ Node* criaNovoNo(int tipoNo){
 	novo->child = NULL;
 	novo->brother = NULL;
 	novo->numChildren = 0;
+	novo->dadosSolucao = NULL;
 
 	return(novo);
 }
@@ -131,9 +132,6 @@ Node* buscaPai(TIPOCHAVE chavePai, Dado** entrada, Node** raiz){
 				return verificaIdRaiz(&aux,(*entrada)->solution.id);
 				break;
 			default:
-					if(aux->type == ROOM || aux->type == TEACHER){
-						return aux;
-					}
 				return FALHA;
 		}		
 	}
@@ -144,8 +142,6 @@ int verifiqueId(Node** p,Dado** entrada){
 		case INSTITUTION: if((*p)->id == (*entrada)->solution.idInstitution){ return SUCESSO;}
 			break;
 		case SOLUTION: if((*p)->id == (*entrada)->solution.id){ return SUCESSO;}
-			break;
-		case ROOM: if((*p)->id == (*entrada)->solution.idRoom){ return SUCESSO;}
 			break;
 		default: return FALHA;
 	}
@@ -166,11 +162,8 @@ Node* insere(Node** raiz, Dado** entrada, TIPOCHAVE novaChave, TIPOCHAVE chavePa
 	switch(novaChave){
 		case INSTITUTION: filho->id = (*entrada)->solution.idInstitution;
 			break;
-		case SOLUTION: filho->id = (*entrada)->solution.id;
-			break;
-		case ROOM: filho->id = (*entrada)->solution.idRoom;
-			break;
-		case TEACHER: filho->id = (*entrada)->solution.idTeacher;
+		case SOLUTION: 	filho->id = (*entrada)->solution.id;
+						filho->dadosSolucao = (*entrada);
 			break;
 		default:
 			break;
@@ -203,28 +196,22 @@ Node* insere(Node** raiz, Dado** entrada, TIPOCHAVE novaChave, TIPOCHAVE chavePa
 	return filho;
 }
 
-void exibirArvore(Node** raiz, int profundidade) {
+void exibirArvore(Node** raiz, int profundidade, FILE* arquivo) {
     if ((*raiz) == NULL)
         return;
 
     for (int i = 0; i < profundidade; i++)
-        printf("\t");
+        fprintf(arquivo, "\t");
 
     switch ((*raiz)->type) {
         case TIME:
-            printf("TIME: %d\n", (*raiz)->id);
+            fprintf(arquivo, "TIME: %d\n", (*raiz)->id);
             break;
         case INSTITUTION:
-            printf("INSTITUTION: %d\n", (*raiz)->id);
+            fprintf(arquivo, "INSTITUTION: %d\n", (*raiz)->id);
             break;
         case SOLUTION:
-            printf("SOLUTION: %d\n", (*raiz)->id);
-            break;
-        case ROOM:
-            printf("ROOM: %d\n", (*raiz)->id);
-            break;
-        case TEACHER:
-            printf("TEACHER: %d\n", (*raiz)->id);
+            fprintf(arquivo, "SOLUTION: %d\n", (*raiz)->id);
             break;
         default:
             break;
@@ -232,12 +219,12 @@ void exibirArvore(Node** raiz, int profundidade) {
 
     Node* root = (*raiz);
 
-    exibirArvore(&root->child, profundidade + 1);
-    exibirArvore(&root->brother, profundidade);
+    exibirArvore(&root->child, profundidade + 1, arquivo);
+    exibirArvore(&root->brother, profundidade, arquivo);
 }
 
 
-int construirArvores(Dado** entrada, Node** raizes) {
+Node* construirArvores(Dado** entrada, Node** raizes) {
 
 	Node* aux;
 	Node* raizDeInsercao;
@@ -250,14 +237,10 @@ int construirArvores(Dado** entrada, Node** raizes) {
         exit(1); 
 	}
 
-	aux = insere(&raizDeInsercao,entrada,INSTITUTION,TIME); if(!aux) return FALHA;
+	aux = insere(&raizDeInsercao,entrada,INSTITUTION,TIME); if(!aux) return NULL;
 
-	aux = insere(&raizDeInsercao,entrada,SOLUTION,INSTITUTION); if(!aux) return FALHA;
+	aux = insere(&raizDeInsercao,entrada,SOLUTION,INSTITUTION); if(!aux) return NULL;
 
-	aux = insere(&raizDeInsercao,entrada,ROOM,SOLUTION); if(!aux) return FALHA;
-
-	aux = insere(&raizDeInsercao,entrada,TEACHER,ROOM); if(!aux) return FALHA;
-
-    return SUCESSO;
+    return raizDeInsercao;
 
 }

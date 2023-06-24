@@ -35,22 +35,24 @@ int main() {
 
     while(entrada){
 
-        checarColisoesParciais(&entrada,&raizes,&lista);
-        checarColisoesTotais(&entrada,&raizes,&lista);
+        Node* raiz = construirArvores(&entrada,&raizes);
 
-        aux = construirArvores(&entrada,&raizes);
-
-        if(!aux){
+        if(!raiz){
             printf("Erro na construção das árvores.");
             exit(1);    
         }
+
+        checarColisoesParciais(&entrada,&raizes,&lista);
+        checarColisoesTotais(&entrada,&raizes,&lista);
 
         entrada = entrada->prox;
     }
 
     Node* r = raizes;
 
-    exibirArvore(&r,0);
+    FILE* arquivoSaida = fopen("saida.txt", "w");  // Abre o arquivo "saida.txt" no modo de escrita
+    exibirArvore(&r,0, arquivoSaida);
+    fclose(arquivoSaida);  // Fecha o arquivo de saída quando terminar
 
     getchar();
 
