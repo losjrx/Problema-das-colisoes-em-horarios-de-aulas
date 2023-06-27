@@ -39,8 +39,6 @@ typedef struct {
     struct DadosEntrada* colisao;
 } DadosEntrada;
 
-DadosEntrada parseDadosEntrada(char *linha);
-
 typedef struct Dado {
     unsigned int chave;
     DadosEntrada solution;
@@ -54,6 +52,7 @@ typedef struct noDescritor {
     int qtdDados;
 } noDescritor;
 
+DadosEntrada parseDadosEntrada(char *linha);
 int criarLista(noDescritor** noD);
 int insOrdemRecebida(noDescritor** noD, DadosEntrada celula);
 int lerDados(noDescritor** noD);
