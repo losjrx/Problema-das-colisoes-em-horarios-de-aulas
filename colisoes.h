@@ -4,7 +4,9 @@
 #include "entradas.h"
 #include "arvores.h"
 
-void identificaPossivelColisao(Node** arvore,Dado** entrada, int tipoColisao);
+void analisaAndGravaColisao(Node** arvore,Dado** entrada, int nivelColisao, int tipoColisao);
+
+void identificaPossivelColisao(Node** arvore,Dado** entrada, int nivelColisao);
 
 void checarColisoesParciais(Dado** entrada, Node** raizes);
 
