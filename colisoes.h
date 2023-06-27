@@ -4,10 +4,10 @@
 #include "entradas.h"
 #include "arvores.h"
 
-void verificaColisao(Node** arvore,Dado** entrada,Dado** lista, int tipoColisao);
+void identificaPossivelColisao(Node** arvore,Dado** entrada, int tipoColisao);
 
-void checarColisoesParciais(Dado** entrada, Node** raizes, noDescritor** lista);
+void checarColisoesParciais(Dado** entrada, Node** raizes);
 
-void checarColisoesTotais(Dado** entrada, Node** raizes, noDescritor** lista);
+void checarColisoesTotais(Dado** entrada, Node** raiz);
 
 #endif

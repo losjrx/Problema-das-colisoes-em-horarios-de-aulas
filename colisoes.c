@@ -8,31 +8,52 @@
 #define TOTAL 1024
 #define PARCIAL 512
 
-void verificaColisao(Node** arvore,Dado** entrada,Dado** lista, int tipoColisao){
+void analisaAndGravaColisao(Node** arvore,Dado** entrada, int tipoColisao){
+	if(tipoColisao == TOTAL){
+		printf("COLISÃO TOTAL\n");
+		printf("NÚMERO DA SOLUÇÃO: %d\n", (*arvore)->id);
+    	printf("NÚMERO DA ENTRADA: %d\n\n", (*entrada)->solution.id);
+	} else {
+		printf("COLISÃO PARCIAL\n");
+		printf("NÚMERO DA SOLUÇÃO: %d\n", (*arvore)->id);
+    	printf("NÚMERO DA ENTRADA: %d\n\n", (*entrada)->solution.id);
+	}
+}
+
+void identificaPossivelColisao(Node** arvore,Dado** entrada, int tipoColisao){
 	if ((*arvore) == NULL)
         return;
 
-    if((*arvore)->type == SOLUTION){
-    	printf("NÚMERO DA SOLUÇÃO: %d\n", (*arvore)->id);
-    	printf("NÚMERO DA ENTRADA: %d\n\n", (*entrada)->solution.id);
-    }
+    if((*arvore)->type == SOLUTION)
+    	if(tipoColisao == PARCIAL)
+    		if((*arvore)->dadosSolucao->solution.idTeacher == (*entrada)->solution.idTeacher
+    			|| (*arvore)->dadosSolucao->solution.idRoom == (*entrada)->solution.idRoom)
+					analisaAndGravaColisao(arvore,entrada,tipoColisao);
+    
+
+    if((*arvore)->type == SOLUTION)
+    	if(tipoColisao == TOTAL)
+    		if((*arvore)->id != (*entrada)->solution.id)
+    			if((*arvore)->dadosSolucao->solution.idTeacher == (*entrada)->solution.idTeacher
+    			|| (*arvore)->dadosSolucao->solution.idRoom == (*entrada)->solution.idRoom)
+					analisaAndGravaColisao(arvore,entrada,tipoColisao);
+    
 
     Node* proxNode = (*arvore);
 
-    verificaColisao(&proxNode->child, entrada, lista, tipoColisao);
+    identificaPossivelColisao(&proxNode->child, entrada, tipoColisao);
 
     if(proxNode->brother != NULL)
     	if((proxNode->brother)->type == TIME)
     		return;
 
-    verificaColisao(&proxNode->brother, entrada, lista, tipoColisao);
+    identificaPossivelColisao(&proxNode->brother, entrada, tipoColisao);
 }
 
 //IMPLEMENTAR
-void checarColisoesParciais(Dado** entrada, Node** raizes, noDescritor** lista){
+void checarColisoesParciais(Dado** entrada, Node** raizes){
 
 	struct Dado* e = (*entrada);
-	struct Dado* l = (*lista)->first;
 	int aux = 0;
 
 	Node* r = (*raizes);
@@ -53,7 +74,7 @@ void checarColisoesParciais(Dado** entrada, Node** raizes, noDescritor** lista){
 			((e->solution.idBeginSlot == (r->timeSet)->idBeginSlot) && (e->solution.idEndSlot > (r->timeSet)->idEndSlot)) ||
 			((e->solution.idBeginSlot < (r->timeSet)->idBeginSlot) && (e->solution.idEndSlot > (r->timeSet)->idEndSlot))) {
 
-			verificaColisao(&r,&e,&l,PARCIAL);
+			identificaPossivelColisao(&r,&e,PARCIAL);
 		}
 
 		//Caso em que a colisão é PARCIAL para a RAIZ e TOTAL para a ENTRADA  //1,6,7
@@ -61,7 +82,7 @@ void checarColisoesParciais(Dado** entrada, Node** raizes, noDescritor** lista){
 			((e->solution.idBeginSlot == (r->timeSet)->idBeginSlot) && (e->solution.idEndSlot < (r->timeSet)->idEndSlot)) ||
 			((e->solution.idBeginSlot > (r->timeSet)->idBeginSlot) && (e->solution.idBeginSlot < (r->timeSet)->idEndSlot) && (e->solution.idEndSlot < (r->timeSet)->idEndSlot))) {
 
-			verificaColisao(&r,&e,&l,PARCIAL);
+			identificaPossivelColisao(&r,&e,PARCIAL);
 
 		}
 
@@ -69,7 +90,7 @@ void checarColisoesParciais(Dado** entrada, Node** raizes, noDescritor** lista){
 		if(((e->solution.idBeginSlot > (r->timeSet)->idBeginSlot) && (e->solution.idBeginSlot < (r->timeSet)->idEndSlot) && (e->solution.idEndSlot > (r->timeSet)->idEndSlot)) || 
 			((e->solution.idBeginSlot < (r->timeSet)->idBeginSlot) && (e->solution.idEndSlot > (r->timeSet)->idBeginSlot) && (e->solution.idEndSlot < (r->timeSet)->idEndSlot))) {
 
-			verificaColisao(&r,&e,&l,PARCIAL);
+			identificaPossivelColisao(&r,&e,PARCIAL);
 
 		}
 
@@ -78,6 +99,6 @@ void checarColisoesParciais(Dado** entrada, Node** raizes, noDescritor** lista){
 }
 
 //IMPLEMENTAR
-void checarColisoesTotais(Dado** entrada, Node** raizes, noDescritor** lista){
-	return;
+void checarColisoesTotais(Dado** entrada, Node** raiz){
+	identificaPossivelColisao(raiz,entrada,TOTAL);
 }

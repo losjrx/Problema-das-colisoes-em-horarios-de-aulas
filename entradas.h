@@ -44,6 +44,7 @@ DadosEntrada parseDadosEntrada(char *linha);
 typedef struct Dado {
     unsigned int chave;
     DadosEntrada solution;
+    struct Dado* ant;
     struct Dado* prox;
 } Dado;
 
@@ -57,6 +58,5 @@ int criarLista(noDescritor** noD);
 int insOrdemRecebida(noDescritor** noD, DadosEntrada celula);
 int lerDados(noDescritor** noD);
 void printarDados(noDescritor** noD);
-Dado* encontraDado(int idSolution, noDescritor** noD);
 
 #endif

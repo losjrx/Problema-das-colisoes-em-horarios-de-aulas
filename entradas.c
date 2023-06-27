@@ -34,7 +34,6 @@ int criarLista(noDescritor** noD){
 int insOrdemRecebida(noDescritor** noD, DadosEntrada celula){
 
     struct Dado* q;
-    struct Dado* r;
     
     q=(Dado*)malloc(sizeof(Dado));
     if(q==NULL){printf("MEMORIA INSUFICIENTE\n"); return(FALHA);} else {
@@ -44,14 +43,36 @@ int insOrdemRecebida(noDescritor** noD, DadosEntrada celula){
         q->solution=celula;
         
         if((*noD)->first==NULL){
+            q->ant=NULL;
             q->prox=NULL;
             (*noD)->first=q;
             (*noD)->last=q;
         } else {
-            q->prox=NULL;
-            r=(*noD)->last;
-            r->prox=q;
-            (*noD)->last=q;
+            struct Dado* atual = (*noD)->first;
+            struct Dado* anterior = NULL;
+            while (atual != NULL &&
+                   (q->solution.idInstitution > atual->solution.idInstitution ||
+                    (q->solution.idInstitution == atual->solution.idInstitution &&
+                     (q->solution.idUnit > atual->solution.idUnit ||
+                      (q->solution.idUnit == atual->solution.idUnit &&
+                       (q->solution.idCourse > atual->solution.idCourse ||
+                        (q->solution.idCourse == atual->solution.idCourse &&
+                         q->solution.idClass > atual->solution.idClass))))))) {
+                anterior = atual;
+                atual = atual->prox;
+            }
+            if (anterior == NULL) {
+                q->prox = (*noD)->first;
+                ((*noD)->first)->ant = q;
+                (*noD)->first = q;
+            } else {
+                anterior->prox = q;
+                q->ant = anterior;
+                q->prox = atual;
+                if (atual != NULL) {
+                    atual->ant = q;
+                }
+            }
         }
     }
     return(SUCESSO);
@@ -132,14 +153,4 @@ void printarDados(noDescritor** noD){
 
         q=q->prox;
     }
-}
-
-Dado* encontraDado(int idSolution, noDescritor** noD){
-    Dado* q = (*noD)->first;
-
-    while(q->solution.idSolution != idSolution){
-        q = q->prox;
-    }
-
-    return q;
 }

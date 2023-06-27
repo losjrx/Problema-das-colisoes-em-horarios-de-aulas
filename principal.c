@@ -42,8 +42,8 @@ int main() {
             exit(1);    
         }
 
-        checarColisoesParciais(&entrada,&raizes,&lista);
-        checarColisoesTotais(&entrada,&raizes,&lista);
+        checarColisoesParciais(&entrada,&raizes);
+        checarColisoesTotais(&entrada,&raiz);
 
         entrada = entrada->prox;
     }
