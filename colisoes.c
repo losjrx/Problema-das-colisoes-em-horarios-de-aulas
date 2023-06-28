@@ -50,23 +50,9 @@ void analisaAndGravaColisao(Node** arvore,Dado** entrada, int nivelColisao, int 
 
 	(*entrada)->solution.collisionSize = (tamanhoColisao > (*entrada)->solution.collisionSize) ? tamanhoColisao : (*entrada)->solution.collisionSize;
 
-	if(nivelColisao == TOTAL){
-		printf("COLISAO TOTAL\n");
-		printf("NUMERO DA SOLUCAO: %d\n", (*arvore)->id);
-    	printf("NUMERO DA ENTRADA: %d\n", (*entrada)->solution.id);
-    	printf("TIPO DE COLISAO: %d\n", tipoColisao);
-    	printf("NIVEL DE COLISAO: %d\n", nivelColisao);
-    	printf("TAMANHO DA COLISAO EM MINUTOS: %d\n\n", tamanhoColisao);
-	} 
+	(*entrada)->solution.colisao = &((*arvore)->dadosSolucao->solution);
 
-	if(nivelColisao == PARCIAL){
-		printf("COLISAO PARCIAL\n");
-		printf("NUMERO DA SOLUCAO: %d\n", (*arvore)->id);
-    	printf("NUMERO DA ENTRADA: %d\n", (*entrada)->solution.id);
-    	printf("TIPO DE COLISAO: %d\n", tipoColisao);
-    	printf("NIVEL DE COLISAO: %d\n", nivelColisao);
-    	printf("TAMANHO DA COLISAO EM MINUTOS: %d\n\n", tamanhoColisao);
-	}
+	(*arvore)->dadosSolucao->solution.colisao = &((*entrada)->solution);
 	
 }
 

@@ -5,7 +5,7 @@
 #define FALHA 0
 #define SUCESSO 1
 
-typedef struct {
+typedef struct DadosEntrada {
     int id;
     int idSolution;
     char solutionName[TAMANHO_MAX_STRING];
@@ -56,6 +56,6 @@ DadosEntrada parseDadosEntrada(char *linha);
 int criarLista(noDescritor** noD);
 int insOrdemRecebida(noDescritor** noD, DadosEntrada celula);
 int lerDados(noDescritor** noD);
-void printarDados(noDescritor** noD);
+void printarDados(noDescritor** noD, FILE* arquivo);
 
 #endif

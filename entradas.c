@@ -112,13 +112,58 @@ int lerDados(noDescritor** noD){
     return SUCESSO;
 }
 
-void printarDados(noDescritor** noD){
+void printarDados(noDescritor** noD, FILE* arquivo){
     struct Dado* q;
 
     q=(*noD)->first;
 
+    int prevIdInstitution = -1;
+    int prevIdUnit = -1;
+    int prevIdCourse = -1;
+    int prevIdClass = -1;
+
     while(q != NULL){
 
+        if(q->solution.colisao == NULL){
+            q=q->prox;
+            continue;
+        }
+
+
+        if(q->solution.colisao != NULL){
+
+            if (q->solution.idInstitution != prevIdInstitution){
+                fprintf(arquivo, "Instituição: %d\n", q->solution.idInstitution);
+                prevIdInstitution = q->solution.idInstitution;
+            }
+
+            if(q->solution.idUnit != prevIdUnit){
+                fprintf(arquivo, "\tUnidade: %d\n", q->solution.idUnit);
+                prevIdUnit = q->solution.idUnit;
+            }
+            
+            if(q->solution.idCourse != prevIdCourse){
+                fprintf(arquivo, "\t\tCurso: %d\n", q->solution.idCourse);
+                prevIdCourse = q->solution.idCourse;
+
+            }
+
+            if(q->solution.idClass != prevIdClass){
+                fprintf(arquivo, "\t\t\tTurma: %d\n", q->solution.idClass);
+                prevIdClass = q->solution.idClass;
+
+            }
+
+            fprintf(arquivo, "\t\t\t\tColisao com solucao de id: %d\n", q->solution.colisao->id);
+
+
+                
+                   
+            //q->solution.idClass,q->solution.colisao->idInstitution,q->solution.colisao->idUnit,q->solution.colisao->idCourse,q->solution.colisao->idClass;
+
+        }   
+
+        /*
         printf("id: %d\n", q->solution.id);
         printf("idSolution: %d\n", q->solution.idSolution);
         printf("solutionName: %s\n", q->solution.solutionName);
@@ -150,6 +195,7 @@ void printarDados(noDescritor** noD){
         printf("collisionLevel: %d\n", q->solution.collisionLevel);
         printf("collisionSize: %d\n", q->solution.collisionSize);
         printf("\n");
+        */
 
         q=q->prox;
     }

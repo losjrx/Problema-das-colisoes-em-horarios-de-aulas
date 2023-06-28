@@ -4,7 +4,7 @@
 #include "entradas.h"
 #include "arvores.h"
 
-int calculaTempoColisao(Node** arvore,Dado** entrada, int nivelColisao)
+int calculaTempoColisao(Node** arvore,Dado** entrada, int nivelColisao);
 
 void analisaAndGravaColisao(Node** arvore,Dado** entrada, int nivelColisao, int tipoColisao);
 

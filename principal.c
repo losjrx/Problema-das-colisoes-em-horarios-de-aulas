@@ -22,8 +22,6 @@ int main() {
         exit(1);
     }
 
-    //printarDados(&lista);
-
     raizes = inicializaArvores(TIME);
 
     if(!raizes){
@@ -51,7 +49,8 @@ int main() {
     Node* r = raizes;
 
     FILE* arquivoSaida = fopen("saida.txt", "w");  // Abre o arquivo "saida.txt" no modo de escrita
-    exibirArvore(&r,0, arquivoSaida);
+    //exibirArvore(&r,0, arquivoSaida);
+    printarDados(&lista,arquivoSaida);
     fclose(arquivoSaida);  // Fecha o arquivo de saída quando terminar
 
     getchar();
