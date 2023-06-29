@@ -57,7 +57,11 @@ int insOrdemRecebida(noDescritor** noD, DadosEntrada celula){
                       (q->solution.idUnit == atual->solution.idUnit &&
                        (q->solution.idCourse > atual->solution.idCourse ||
                         (q->solution.idCourse == atual->solution.idCourse &&
-                         q->solution.idClass > atual->solution.idClass))))))) {
+                         (q->solution.idClass > atual->solution.idClass ||
+                          (q->solution.idClass == atual->solution.idClass &&
+                           (q->solution.idDay > atual->solution.idDay ||
+                            (q->solution.idDay == atual->solution.idDay &&
+                             q->solution.idBeginSlot > atual->solution.idBeginSlot))))))))))) {
                 anterior = atual;
                 atual = atual->prox;
             }
@@ -112,6 +116,52 @@ int lerDados(noDescritor** noD){
     return SUCESSO;
 }
 
+
+char* tipoDaColisao(int idDay) {
+    switch (idDay) {
+        case 1:
+            return "Professor";
+        case 2:
+            return "Sala";
+        case 3:
+            return "Professor e Sala";
+        default:
+            return "Erro";
+    }
+}
+
+char* nivelDaColisao(int idDay) {
+    switch (idDay) {
+        case 1:
+            return ", parcial";
+        case 2:
+            return ", total";
+        default:
+            return "Erro";
+    }
+}
+
+char* diaDaSemana(int idDay) {
+    switch (idDay) {
+        case 1:
+            return "Dom";
+        case 2:
+            return "Seg";
+        case 3:
+            return "Ter";
+        case 4:
+            return "Qua";
+        case 5:
+            return "Qui";
+        case 6:
+            return "Sex";
+        case 7:
+            return "Sáb";
+        default:
+            return "Erro";
+    }
+}
+
 void printarDados(noDescritor** noD, FILE* arquivo){
     struct Dado* q;
 
@@ -125,6 +175,12 @@ void printarDados(noDescritor** noD, FILE* arquivo){
     while(q != NULL){
 
         if(q->solution.colisao == NULL){
+
+            if(q->solution.idClass != prevIdClass){
+               fprintf(arquivo, "\t\t\tTurma: %d\n", q->solution.idClass);
+                prevIdClass = q->solution.idClass; 
+            }
+                
             q=q->prox;
             continue;
         }
@@ -154,48 +210,17 @@ void printarDados(noDescritor** noD, FILE* arquivo){
 
             }
 
-            fprintf(arquivo, "\t\t\t\tColisao com solucao de id: %d\n", q->solution.colisao->id);
-
-
-                
-                   
-            //q->solution.idClass,q->solution.colisao->idInstitution,q->solution.colisao->idUnit,q->solution.colisao->idCourse,q->solution.colisao->idClass;
+            fprintf(arquivo, "\t\t\t\t%s ", diaDaSemana(q->solution.colisao->idDay));
+            fprintf(arquivo, "%c%c%c%c%c-", q->solution.colisao->beginTimeName[0],q->solution.colisao->beginTimeName[1],q->solution.colisao->beginTimeName[2],
+                q->solution.colisao->beginTimeName[3],q->solution.colisao->beginTimeName[4],q->solution.colisao->beginTimeName[5]);
+            fprintf(arquivo, "%c%c%c%c%c - ", q->solution.colisao->endTimeName[0],q->solution.colisao->endTimeName[1],q->solution.colisao->endTimeName[2],
+                q->solution.colisao->endTimeName[3],q->solution.colisao->endTimeName[4],q->solution.colisao->endTimeName[5]);
+            fprintf(arquivo, "%s%s -> [Instituição: %d, Unidade: %d, Curso: %d, Turma %d, Prof: %d, Sala: %d]\n", 
+                tipoDaColisao(q->solution.idCollisionType), nivelDaColisao(q->solution.collisionLevel),
+                q->solution.colisao->idInstitution, q->solution.colisao->idUnit, q->solution.colisao->idCourse, q->solution.colisao->idClass, 
+                q->solution.colisao->idTeacher, q->solution.colisao->idRoom);
 
         }   
-
-        /*
-        printf("id: %d\n", q->solution.id);
-        printf("idSolution: %d\n", q->solution.idSolution);
-        printf("solutionName: %s\n", q->solution.solutionName);
-        printf("solutionInitials: %s\n", q->solution.solutionInitials);
-        printf("idTeacher: %d\n", q->solution.idTeacher);
-        printf("teacherName: %s\n", q->solution.teacherName);
-        printf("idDay: %d\n", q->solution.idDay);
-        printf("idInstitution: %d\n", q->solution.idInstitution);
-        printf("idUnit: %d\n", q->solution.idUnit);
-        printf("unitName: %s\n", q->solution.unitName);
-        printf("idUnitCourse: %d\n", q->solution.idUnitCourse);
-        printf("idCourse: %d\n", q->solution.idCourse);
-        printf("courseName: %s\n", q->solution.courseName);
-        printf("idClass: %d\n", q->solution.idClass);
-        printf("className: %s\n", q->solution.className);
-        printf("idDiscipline: %d\n", q->solution.idDiscipline);
-        printf("disciplineName: %s\n", q->solution.disciplineName);
-        printf("idRoom: %d\n", q->solution.idRoom);
-        printf("roomName: %s\n", q->solution.roomName);
-        printf("studentsNumber: %d\n", q->solution.studentsNumber);
-        printf("sequence: %d\n", q->solution.sequence);
-        printf("idBeginSlot: %d\n", q->solution.idBeginSlot);
-        printf("beginTimeName: %s\n", q->solution.beginTimeName);
-        printf("idEndSlot: %d\n", q->solution.idEndSlot);
-        printf("endTimeName: %s\n", q->solution.endTimeName);
-        printf("idYear: %d\n", q->solution.idYear);
-        printf("idTerm: %d\n", q->solution.idTerm);
-        printf("idCollisionType: %d\n", q->solution.idCollisionType);
-        printf("collisionLevel: %d\n", q->solution.collisionLevel);
-        printf("collisionSize: %d\n", q->solution.collisionSize);
-        printf("\n");
-        */
 
         q=q->prox;
     }

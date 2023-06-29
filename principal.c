@@ -49,9 +49,20 @@ int main() {
     Node* r = raizes;
 
     FILE* arquivoSaida = fopen("saida.txt", "w");  // Abre o arquivo "saida.txt" no modo de escrita
-    //exibirArvore(&r,0, arquivoSaida);
+
+    printf("\n\n############################################################################################\n\t\t\t");
+    printf("ARVORES CONTENDO AS SOLUCOES COM AS MESMA DATAS E HORARIOS:\n");
+    printf("############################################################################################\n\n");
+    exibirArvore(&r,0);
+    printf("\n\n############################################################################################\n\n");
+    printf("############################################################################################\n\n");
+
     printarDados(&lista,arquivoSaida);
+
     fclose(arquivoSaida);  // Fecha o arquivo de saída quando terminar
+
+    printf("\nARQUIVO saida.txt GERADO COM AS INFORMACOES DAS COLISOES!\n");
+    printf("Pressione Enter para sair.");
 
     getchar();
 

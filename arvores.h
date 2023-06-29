@@ -40,7 +40,7 @@ int verifiqueId(Node** p,Dado** entrada);
 
 Node* insere(Node** raiz, Dado** entrada, TIPOCHAVE novaChave, TIPOCHAVE chavePai);
 
-void exibirArvore(Node** raiz, int profundidade, FILE* arquivo);
+void exibirArvore(Node** raiz, int profundidade);
 
 Node* construirArvores(Dado** entrada, Node** raizes);
 

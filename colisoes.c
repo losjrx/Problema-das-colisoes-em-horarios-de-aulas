@@ -109,7 +109,6 @@ void identificaPossivelColisao(Node** arvore,Dado** entrada, int nivelColisao){
     identificaPossivelColisao(&proxNode->brother, entrada, nivelColisao);
 }
 
-//IMPLEMENTAR
 void checarColisoesParciais(Dado** entrada, Node** raizes){
 
 	struct Dado* e = (*entrada);
@@ -157,7 +156,6 @@ void checarColisoesParciais(Dado** entrada, Node** raizes){
 	}
 }
 
-//IMPLEMENTAR
 void checarColisoesTotais(Dado** entrada, Node** raiz){
 	identificaPossivelColisao(raiz,entrada,TOTAL);
 }

@@ -53,9 +53,19 @@ typedef struct noDescritor {
 } noDescritor;
 
 DadosEntrada parseDadosEntrada(char *linha);
+
 int criarLista(noDescritor** noD);
+
 int insOrdemRecebida(noDescritor** noD, DadosEntrada celula);
+
 int lerDados(noDescritor** noD);
+
+char* tipoDaColisao(int idDay);
+
+char* nivelDaColisao(int idDay);
+
+char* diaDaSemana(int idDay);
+
 void printarDados(noDescritor** noD, FILE* arquivo);
 
 #endif

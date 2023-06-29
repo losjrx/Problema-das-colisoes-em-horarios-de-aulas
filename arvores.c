@@ -196,22 +196,22 @@ Node* insere(Node** raiz, Dado** entrada, TIPOCHAVE novaChave, TIPOCHAVE chavePa
 	return filho;
 }
 
-void exibirArvore(Node** raiz, int profundidade, FILE* arquivo) {
+void exibirArvore(Node** raiz, int profundidade) {
     if ((*raiz) == NULL)
         return;
 
     for (int i = 0; i < profundidade; i++)
-        fprintf(arquivo, "\t");
+        printf("\t");
 
     switch ((*raiz)->type) {
         case TIME:
-            fprintf(arquivo, "TIME: %d\n", (*raiz)->id);
+            printf("TIME: %d\n", (*raiz)->id);
             break;
         case INSTITUTION:
-            fprintf(arquivo, "INSTITUTION: %d\n", (*raiz)->id);
+            printf("INSTITUTION: %d\n", (*raiz)->id);
             break;
         case SOLUTION:
-            fprintf(arquivo, "SOLUTION: %d\n", (*raiz)->id);
+            printf("SOLUTION: %d\n", (*raiz)->id);
             break;
         default:
             break;
@@ -219,8 +219,8 @@ void exibirArvore(Node** raiz, int profundidade, FILE* arquivo) {
 
     Node* root = (*raiz);
 
-    exibirArvore(&root->child, profundidade + 1, arquivo);
-    exibirArvore(&root->brother, profundidade, arquivo);
+    exibirArvore(&root->child, profundidade + 1);
+    exibirArvore(&root->brother, profundidade);
 }
 
 
