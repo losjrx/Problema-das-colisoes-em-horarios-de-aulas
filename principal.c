@@ -5,6 +5,7 @@
 #include "arvores.h"
 #include "colisoes.h"
 
+//variáveis globais para utilização do programa
 Node* raizes;
 noDescritor* lista;
 Dado* entrada;
@@ -15,6 +16,7 @@ int main() {
 
     entrada = NULL;
 
+    //Leitura dos dados do arquivo csv sendo guardados em uma lista linear
     aux = lerDados(&lista);
 
     if(!aux){
@@ -22,6 +24,7 @@ int main() {
         exit(1);
     }
 
+    //Aloca espaço na memória para uma raiz com id = 0 (indica que não há informações inseridas)
     raizes = inicializaArvores(TIME);
 
     if(!raizes){
@@ -31,8 +34,10 @@ int main() {
 
     entrada = (lista)->first;
 
+    //iteração por cada nó da lista para inserção nas árvores
     while(entrada){
 
+        //insere as informações na árvore e retorna o endereço da raiz escolhida
         Node* raiz = construirArvores(&entrada,&raizes);
 
         if(!raiz){
@@ -40,6 +45,7 @@ int main() {
             exit(1);    
         }
 
+        //checa e grava as colisões
         checarColisoesParciais(&entrada,&raizes);
         checarColisoesTotais(&entrada,&raiz);
 
@@ -50,13 +56,7 @@ int main() {
 
     FILE* arquivoSaida = fopen("saida.txt", "w");  // Abre o arquivo "saida.txt" no modo de escrita
 
-    printf("\n\n############################################################################################\n\t\t\t");
-    printf("ARVORES CONTENDO AS SOLUCOES COM AS MESMA DATAS E HORARIOS:\n");
-    printf("############################################################################################\n\n");
-    exibirArvore(&r,0);
-    printf("\n\n############################################################################################\n\n");
-    printf("############################################################################################\n\n");
-
+    //grava a saída com as colisões no arquivo saida.csv
     printarDados(&lista,arquivoSaida);
 
     fclose(arquivoSaida);  // Fecha o arquivo de saída quando terminar

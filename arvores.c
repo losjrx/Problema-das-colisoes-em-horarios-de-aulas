@@ -24,6 +24,7 @@ Node* inicializaArvores(int tipoNo){
 	return(criaNovoNo(tipoNo));
 }
 
+//Escolhe a raiz onde será inserido o nó de acordo com as informações da variável timeSet (struct Time)
 Node* escolheRaiz(Dado** entrada, Node** raizes){
 
 	Node* rootAnterior;
@@ -92,18 +93,20 @@ Node* verificaIdRaiz(Node** pai, int id){
 	}
 }
 
+//A partir da raiz de inserção, dado de entrada e o tipo do pai, busca-se o nó pai
 Node* buscaPai(TIPOCHAVE chavePai, Dado** entrada, Node** raiz){
 	if((*raiz) == NULL) 
 		return FALHA;
 
 	Node* aux = (*raiz);
 	while(aux){
-		if(aux->type == chavePai){
+		if(aux->type == chavePai){ //se o tipo for o mesmo que o pai, retorna-se o endereço
 			break;
 		}
 		aux = aux->child;
 
-		switch(aux->type){
+		//verificação dos irmãos do nós
+		switch(aux->type){		
 			case INSTITUTION: 	while(aux->id != (*entrada)->solution.idInstitution){
 									aux = aux->brother;
 								}
@@ -117,26 +120,26 @@ Node* buscaPai(TIPOCHAVE chavePai, Dado** entrada, Node** raiz){
 	}
 
 	if(!aux){
-		printf("FALHA"); getchar();
+		printf("FALHA");
 		return FALHA;
 	}
 
+	//verifica os ids e retorna o endereço
 	if(aux->type == chavePai){
 		switch(chavePai){
 			case TIME: 
 				return (*raiz);
 			case INSTITUTION: 
 				return verificaIdRaiz(&aux,(*entrada)->solution.idInstitution);
-				break;
 			case SOLUTION: 
 				return verificaIdRaiz(&aux,(*entrada)->solution.id);
-				break;
 			default:
 				return FALHA;
 		}		
 	}
 }
 
+//Verifica se o id do nó é igual ao nó de entrada
 int verifiqueId(Node** p,Dado** entrada){
 	switch((*p)->type){
 		case INSTITUTION: if((*p)->id == (*entrada)->solution.idInstitution){ return SUCESSO;}
@@ -148,8 +151,10 @@ int verifiqueId(Node** p,Dado** entrada){
 	return FALHA;
 }
 
+//recebe a raiz de inserção e o dado de entrada, além de quem é o pai e o tipo da chave
 Node* insere(Node** raiz, Dado** entrada, TIPOCHAVE novaChave, TIPOCHAVE chavePai){
 
+	//Procura quem é o pai daquele novo nó dentro da árvore
 	Node* pai = buscaPai(chavePai, entrada, raiz);
 
 	if(!pai) 
@@ -157,18 +162,21 @@ Node* insere(Node** raiz, Dado** entrada, TIPOCHAVE novaChave, TIPOCHAVE chavePa
 
 	Node* filho = criaNovoNo(novaChave);
 
+	//todos os nós de uma mesma raiz possuem as informações de timeSet
 	filho->timeSet = (*raiz)->timeSet;
 
+	//inserindo as informações do nó, conforme o tipo
 	switch(novaChave){
 		case INSTITUTION: filho->id = (*entrada)->solution.idInstitution;
 			break;
 		case SOLUTION: 	filho->id = (*entrada)->solution.id;
-						filho->dadosSolucao = (*entrada);
+						filho->dadosSolucao = (*entrada);	//O nó SOLUTION aguarda as informações da solução
 			break;
 		default:
 			break;
 	}
 
+	//A partir daqui, tendo quem é o "pai" do nó, verifica se o novo será filho ou irmão dele
 	Node* p = pai->child;
 
 
@@ -177,7 +185,7 @@ Node* insere(Node** raiz, Dado** entrada, TIPOCHAVE novaChave, TIPOCHAVE chavePa
 		++(pai->numChildren);
 	} else {
 		while(p->brother) {
-			if(verifiqueId(&p,entrada)){
+			if(verifiqueId(&p,entrada)){ //verifica se é o mesmo id (exemplo: mesma instituição), não sendo necessária a inserção
 				free(filho);
 				return p;
 			}
@@ -229,6 +237,7 @@ Node* construirArvores(Dado** entrada, Node** raizes) {
 	Node* aux;
 	Node* raizDeInsercao;
 
+	//retorna a raiz onde será inserido o nó
 	raizDeInsercao = escolheRaiz(entrada,raizes);
 
 
@@ -237,8 +246,10 @@ Node* construirArvores(Dado** entrada, Node** raizes) {
         exit(1); 
 	}
 
+	//Insere o nó do tipo INSTITUTION, cujo pai é o TIME (raiz)
 	aux = insere(&raizDeInsercao,entrada,INSTITUTION,TIME); if(!aux) return NULL;
 
+	//Insere o nó do tipo SOLUTION, cujo pai é o INSTITUTION
 	aux = insere(&raizDeInsercao,entrada,SOLUTION,INSTITUTION); if(!aux) return NULL;
 
     return raizDeInsercao;

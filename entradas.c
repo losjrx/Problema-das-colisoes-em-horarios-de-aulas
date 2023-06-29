@@ -3,6 +3,7 @@
 #include <string.h>
 #include "entradas.h"
 
+//Grava os dados na strutc DadosEntrada
 DadosEntrada parseDadosEntrada(char *linha) {
     DadosEntrada entrada;
     sscanf(linha, "%d,%d,%[^,],%[^,],%d,%[^,],%d,%d,%d,%[^,],%d,%d,%[^,],%d,%[^,],%d,%[^,],%d,%[^,],%d,%d,%d,%[^,],%d,%[^,],%d,%d,%d,%d,%d",
@@ -17,6 +18,7 @@ DadosEntrada parseDadosEntrada(char *linha) {
     return entrada;
 }
 
+//aloca memória para o Nó Descritor
 int criarLista(noDescritor** noD){
     noDescritor* q;
     
@@ -31,6 +33,7 @@ int criarLista(noDescritor** noD){
     return(SUCESSO);
 }
 
+//Aloca memória para um novo nó da lista e o insere na ordem com a struct DadosEntrada na variável solution
 int insOrdemRecebida(noDescritor** noD, DadosEntrada celula){
 
     struct Dado* q;
@@ -82,6 +85,7 @@ int insOrdemRecebida(noDescritor** noD, DadosEntrada celula){
     return(SUCESSO);
 }
 
+//abre o arquivo de entrada e grava as informações na lista
 int lerDados(noDescritor** noD){
 
     FILE *file = fopen("ColisaoHorarios-DadosEntrada.csv", "r");
@@ -98,8 +102,10 @@ int lerDados(noDescritor** noD){
 
     char linha[TAMANHO_MAX_STRING];
 
-    fgets(linha, sizeof(linha), file); //ignora primeira linha que contém nomes das variáveis.
+    //Ignora primeira linha que contém nomes das variáveis.
+    fgets(linha, sizeof(linha), file); 
 
+    //Leitura dos dados de entrada
     while (fgets(linha, sizeof(linha), file) != NULL) {
 
         DadosEntrada entrada = parseDadosEntrada(linha);
@@ -117,8 +123,8 @@ int lerDados(noDescritor** noD){
 }
 
 
-char* tipoDaColisao(int idDay) {
-    switch (idDay) {
+char* tipoDaColisao(int idCollisionType) {
+    switch (idCollisionType) {
         case 1:
             return "Professor";
         case 2:
@@ -130,8 +136,8 @@ char* tipoDaColisao(int idDay) {
     }
 }
 
-char* nivelDaColisao(int idDay) {
-    switch (idDay) {
+char* nivelDaColisao(int collisionLevel) {
+    switch (collisionLevel) {
         case 1:
             return ", parcial";
         case 2:
@@ -162,6 +168,7 @@ char* diaDaSemana(int idDay) {
     }
 }
 
+//Grava as informações no arquivo de saída
 void printarDados(noDescritor** noD, FILE* arquivo){
     struct Dado* q;
 
