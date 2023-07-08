@@ -53,6 +53,6 @@ Em cada da linha contém as seguintes informações, nesta ordem:
 >Por exemplo, uma linha de linha típica do arquivo do conjunto de entrada C é: 126, 1001, ’Solução base n. 001’, ’SB-001’, 101, ’Alan Mathison Turing’, 2, 900, 1, ’INF/UFG’, 1, 1, ’BSI’, 3, ’BSI-03’, 1001, ’AED-2’, 305, ’Sala 305’, 55, 3, 75, ’18:45:00’, 88, ’22:00:00’, 2023, 1, 0, 0, 0
 
 
-##Arquivo de saída
+### Arquivo de saída
 
 É gerado o arquivo de saída saidas.txt, com as informações somente dos horários em que houve algum tipo de colisão.
